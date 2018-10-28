@@ -8,8 +8,8 @@ def test_serializes_correctly():
     dist = discrete_distribution.DiscreteDistribution([1, 2, 3], [4, 5, 6])
     expected_json = """
 {
-"population": [1, 2, 3],
-"weights": [4, 5, 6]
+    "population": [1, 2, 3],
+    "weights": [4, 5, 6]
 }
 """
 

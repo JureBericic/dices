@@ -28,6 +28,16 @@ def test_initialized_correctly_with_weights():
     assert dist.weights == weights
 
 
+def test_raises_when_incorrect_length_of_weights():
+    # Arrange
+    population = [1, 2, 3]
+    weights = [4, 5]
+
+    # Assert
+    with pytest.raises(ValueError):
+        discrete_distribution.DiscreteDistribution(population, weights)
+
+
 def test_from_dict_constructs_properly():
     # Arrange
     a_dict = {
