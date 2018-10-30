@@ -71,6 +71,35 @@ class BivariateDiscreteDistribution:
 
         return cumulative_weights
 
+    @property
+    def probability_distribution(self):
+        sum_weights = sum([sum(weights_) for weights_ in self.weights])
+        return [[weight/sum_weights for weight in weights_] for weights_ in self.weights]
+
+    @property
+    def cumulative_distribution(self):
+        sum_weights = sum([sum(weights_) for weights_ in self.weights])
+        return [
+            [cumulative_weight/sum_weights for cumulative_weight in cumulative_weight_]
+            for cumulative_weight_ in self.cumulative_weights
+        ]
+
+    @property
+    def marginal_distribution_X(self):
+        sum_weights = sum([sum(weights_) for weights_ in self.weights])
+        weights = self.weights
+        weights_X = [
+            sum([weights[j][i] for j, _ in enumerate(self.population_Y)])
+            for i, _ in enumerate(self.population_X)
+        ]
+        return [weight_X/sum_weights for weight_X in weights_X]
+
+    @property
+    def marginal_distribution_Y(self):
+        sum_weights = sum([sum(weights_) for weights_ in self.weights])
+        weights_Y = [sum(weights_) for weights_ in self.weights]
+        return [weight_Y/sum_weights for weight_Y in weights_Y]
+
     def add_to_index(self, index_x, index_y, weight=1):
         self.weights[index_y][index_x] += weight
 

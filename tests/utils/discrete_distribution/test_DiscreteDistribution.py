@@ -1,6 +1,6 @@
 import pytest
 
-from dices.utils import discrete_distribution
+from dices.utils.discrete_distribution import DiscreteDistribution
 
 
 def test_initialized_correctly_without_weights():
@@ -8,7 +8,7 @@ def test_initialized_correctly_without_weights():
     population = [1, 2, 3]
 
     # Act
-    dist = discrete_distribution.DiscreteDistribution(population)
+    dist = DiscreteDistribution(population)
 
     # Assert
     assert dist.population == population
@@ -21,7 +21,7 @@ def test_initialized_correctly_with_weights():
     weights = [4, 5, 6]
 
     # Act
-    dist = discrete_distribution.DiscreteDistribution(population, weights)
+    dist = DiscreteDistribution(population, weights)
 
     # Assert
     assert dist.population == population
@@ -35,7 +35,7 @@ def test_raises_when_incorrect_length_of_weights():
 
     # Assert
     with pytest.raises(ValueError):
-        discrete_distribution.DiscreteDistribution(population, weights)
+        DiscreteDistribution(population, weights)
 
 
 def test_from_dict_constructs_properly():
@@ -46,7 +46,7 @@ def test_from_dict_constructs_properly():
     }
 
     # Act
-    dist = discrete_distribution.DiscreteDistribution.from_dict(a_dict)
+    dist = DiscreteDistribution.from_dict(a_dict)
 
     # Arrange
     assert dist.population == a_dict['population']
@@ -55,7 +55,7 @@ def test_from_dict_constructs_properly():
 
 def test_cumulative_weights_are_calculated_correctly():
     # Arrange
-    dist = discrete_distribution.DiscreteDistribution([1, 2, 3], [4, 5, 6])
+    dist = DiscreteDistribution([1, 2, 3], [4, 5, 6])
 
     # Act
     cumulative_weights = dist.cumulative_weights
@@ -66,7 +66,7 @@ def test_cumulative_weights_are_calculated_correctly():
 
 def test_probability_distribution_is_calculated_correctly():
     # Arrange
-    dist = discrete_distribution.DiscreteDistribution([1, 2, 3], [1, 5, 4])
+    dist = DiscreteDistribution([1, 2, 3], [1, 5, 4])
 
     # Act
     probability_distribution = dist.probability_distribution
@@ -77,7 +77,7 @@ def test_probability_distribution_is_calculated_correctly():
 
 def test_cumulative_distribution_is_calculated_correctly():
     # Arrange
-    dist = discrete_distribution.DiscreteDistribution([1, 2, 3], [1, 5, 4])
+    dist = DiscreteDistribution([1, 2, 3], [1, 5, 4])
 
     # Act
     cumulative_distribution = dist.cumulative_distribution
@@ -88,7 +88,7 @@ def test_cumulative_distribution_is_calculated_correctly():
 
 def test_complementary_cumulative_distribution_is_calculated_correctly():
     # Arrange
-    dist = discrete_distribution.DiscreteDistribution([1, 2, 3], [1, 5, 4])
+    dist = DiscreteDistribution([1, 2, 3], [1, 5, 4])
 
     # Act
     complementary_cumulative_distribution = dist.complementary_cumulative_distribution
@@ -103,7 +103,7 @@ def test_complementary_cumulative_distribution_is_calculated_correctly():
 ])
 def test_add_adds_correctly(test_input, expected_weights):
     # Arrange
-    dist = discrete_distribution.DiscreteDistribution([1, 2, 3])
+    dist = DiscreteDistribution([1, 2, 3])
 
     # Act
     dist.add(**test_input)
@@ -118,7 +118,7 @@ def test_add_adds_correctly(test_input, expected_weights):
 ])
 def test_add_to_index_adds_correctly(test_input, expected_weights):
     # Arrange
-    dist = discrete_distribution.DiscreteDistribution([1, 2, 3])
+    dist = DiscreteDistribution([1, 2, 3])
 
     # Act
     dist.add_to_index(**test_input)
