@@ -62,6 +62,15 @@ class BivariateDiscreteDistribution:
     def from_dict(cls, a_dict):
         return BivariateDiscreteDistribution(a_dict['population_X'], a_dict['population_Y'], a_dict['weights'])
 
+    @property
+    def cumulative_weights(self):
+        cumulative_weights = [list(accumulate(weights_)) for weights_ in self.weights]
+        for j in range(1, len(cumulative_weights)):
+            for i in range(len(cumulative_weights[j])):
+                cumulative_weights[j][i] += cumulative_weights[j-1][i]
+
+        return cumulative_weights
+
     def add_to_index(self, index_x, index_y, weight=1):
         self.weights[index_y][index_x] += weight
 

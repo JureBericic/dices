@@ -49,6 +49,7 @@ def test_raises_when_incorrect_shape_of_weights(weights):
     with pytest.raises(ValueError):
         BivariateDiscreteDistribution(population_X, population_Y, weights)
 
+
 def test_from_dict_constructs_properly():
     # Arrange
     a_dict = {
@@ -82,6 +83,23 @@ def test_add_to_index_adds_correctly(index_x, index_y, weight, expected_weights)
 
     # Assert
     assert dist.weights == expected_weights
+
+
+@pytest.mark.parametrize("population_X,population_Y,weights,expected_cumulative_weights", [
+    ([1, 2], [10, 20, 30], [[11, 12], [21, 22], [31, 32]], [[11, 23], [32, 66], [63, 129]]),
+    ([1], [10, 20], [[11], [21]], [[11], [32]]),
+    ([1, 2], [10], [[11, 12]], [[11, 23]]),
+    ([1], [10], [[11]], [[11]])
+])
+def test_cumulative_weights_are_calculated_correctly(population_X, population_Y, weights, expected_cumulative_weights):
+    # Arrange
+    dist = BivariateDiscreteDistribution(population_X, population_Y, weights)
+
+    # Act
+    cumulative_weights = dist.cumulative_weights
+
+    # Assert
+    assert cumulative_weights == expected_cumulative_weights
 
 
 @pytest.mark.parametrize("value_x,value_y,weight,expected_weights", [
