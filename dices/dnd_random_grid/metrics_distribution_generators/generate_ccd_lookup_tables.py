@@ -5,6 +5,7 @@ from dices.utils.discrete_distribution import DiscreteDistribution
 
 
 distribution_root_path = Path('../../../data/dnd_random_grid/metrics_distributions')
+lookup_tables_root_path = Path('../../../data/dnd_random_grid/metrics_lookup_tables')
 metrics = ['max_value', 'sum_all', 'sum_max_selectable', 'sum_max_three']
 
 for metric in metrics:
@@ -45,5 +46,5 @@ for metric in metrics:
             content += ',{0:>8.5f}'.format(ccd[i])
 
     # write table
-    with Path(distribution_root_path, f'{metric}_ccd.csv').open('w') as fo:
+    with Path(lookup_tables_root_path, f'{metric}_ccd.csv').open('w') as fo:
         fo.write(content)
