@@ -1,6 +1,6 @@
 import pytest
 
-from analyze_grid import metrics_sum_all
+from dices.dnd_random_grid.metrics import sum_all
 
 
 @pytest.mark.parametrize("grid_values,expected_score", [
@@ -9,7 +9,7 @@ from analyze_grid import metrics_sum_all
 ])
 def test_calculates_score_correctly(grid_values, expected_score):
     # Act
-    score = metrics_sum_all(grid_values)
+    score = sum_all(grid_values)
 
     # Assert
     assert score == expected_score

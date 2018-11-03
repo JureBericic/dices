@@ -28,5 +28,5 @@ if __name__ == '__main__':
     print('Generating distribution for 4D6 drop lowest rolls.')
     dist = generate_distribution()
 
-    with open('../../data/roll_distributions/roll_distribution_4d6dl.json', 'w') as fo:
+    with open('../../data/roll_distributions/4d6dl.json', 'w') as fo:
         json.dump(dist, fo, cls=dd.DiscreteDistributionSerializer)

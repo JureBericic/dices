@@ -22,5 +22,5 @@ if __name__ == '__main__':
     print('Generating distribution for 3D6 rolls.')
     dist = generate_distribution()
 
-    with open('../../data/roll_distributions/roll_distribution_3d6.json', 'w') as fo:
+    with open('../../data/roll_distributions/3d6.json', 'w') as fo:
         json.dump(dist, fo, cls=dd.DiscreteDistributionSerializer)

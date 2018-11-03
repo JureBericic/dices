@@ -1,6 +1,6 @@
 import pytest
 
-from analyze_grid import metrics_sum_max_selectable
+from dices.dnd_random_grid.metrics import sum_max_selectable
 
 
 @pytest.mark.parametrize("grid_values,expected_score", [
@@ -13,7 +13,7 @@ from analyze_grid import metrics_sum_max_selectable
 ])
 def test_calculated_score_correctly(grid_values, expected_score):
     # Act
-    score = metrics_sum_max_selectable(grid_values)
+    score = sum_max_selectable(grid_values)
 
     # Assert
     assert score == expected_score
